@@ -37,12 +37,7 @@ inline T* SpawnActor3(FVector Loc = {}, FRotator Rot = {}, UClass* ActorClass = 
 	Transform.Rotation = Quat;
 	Transform.Scale3D = FVector{ 1,1,1 };
 	Transform.Translation = Loc;
-
-	auto Actor = GetDefaultObject<UGameplayStatics>()->STATIC_BeginSpawningActorFromClass(Globals::GetWorld(), ActorClass, Transform, false, nullptr);
-	GetDefaultObject<UGameplayStatics>()->STATIC_FinishSpawningActor(Actor, Transform);
-	return (T*)Actor;
 }
-
 class Inventory
 {
 public:
@@ -75,35 +70,7 @@ public:
 
 		return nullptr;
 	}
-	static UFortWorldItem* FindItemFromGuid(AFortPlayerController* PlayerController, FGuid Guid)
-	{
-		for (int i = 0; i < PlayerController->WorldInventory->Inventory.ItemInstances.Num(); i++)
-		{
-			auto ItemInstance = PlayerController->WorldInventory->Inventory.ItemInstances[i];
 
-			if (ItemInstance->ItemEntry.ItemGuid == Guid)
-			{
-				return ItemInstance;
-			}
-		}
-
-		return nullptr;
-	}
-
-	static FFortItemEntry* FindEntryFromGuid(AFortPlayerController* PlayerController, FGuid Guid)
-	{
-		for (int i = 0; i < PlayerController->WorldInventory->Inventory.ReplicatedEntries.Num(); i++)
-		{
-			auto Entry = &PlayerController->WorldInventory->Inventory.ReplicatedEntries[i];
-
-			if (Entry->ItemGuid == Guid)
-			{
-				return Entry;
-			}
-		}
-
-		return nullptr;
-	}
 	static UFortWorldItem* CreateItem(UFortItemDefinition* ItemDef, int Count)
 	{
 		return Cast<UFortWorldItem>(ItemDef->CreateTemporaryItemInstanceBP(Count, 1));
