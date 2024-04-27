@@ -1,2 +1,5 @@
 # Sulfur 6.10
-this is just a attemp to fix jager src 6.10 is so shit and all is borkend  but i fix the src so u can build the dll but idk if work
+
+
+
+the code is ass and to get it working u need to fix the lisening and the hosting shit but i just fix the crash thx to inventory and smh 
