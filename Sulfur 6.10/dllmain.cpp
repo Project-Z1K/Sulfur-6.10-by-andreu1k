@@ -12,7 +12,7 @@ static inline void (*InitListen)(UNetDriver*, void*, FURL, bool, FString&);
 void (*SetReplicationDriver)(UNetDriver*, UReplicationDriver*);
 char (*LoadMap)(UGameEngine*, void*, FURL, void*, void*);
 static inline void (*ServerReplicateActors)(UReplicationGraph* RepGraph);
-static void (*MarkArrayDirty)(FFastArraySerializer*);
+//static void (*MarkArrayDirty)(FFastArraySerializer*);
 
 inline bool bTraveled = false;
 inline bool bPlayButton = false;
@@ -171,7 +171,7 @@ void* ProcessEventHook(UObject* Object, UFunction* Function, void* Params)
 
 			GameState->CurrentPlaylistInfo.BasePlaylist = Playlist;
 			GameState->CurrentPlaylistInfo.PlaylistReplicationKey++;
-			GameState->CurrentPlaylistInfo.MarkArrayDirty();
+			//GameState->CurrentPlaylistInfo.MarkArrayDirty();
 			GameState->OnRep_CurrentPlaylistInfo();
 
 			GameState->PlayersLeft = 0;
@@ -226,12 +226,12 @@ static inline void SetClientLoginStateHook(UNetConnection* NetConnection, uint8_
 {
 	if (State == 3)
 	{
-		static bool bSpawnedFloorLoot = false;
+		//static bool bSpawnedFloorLoot = false;
 
-		if (!bSpawnedFloorLoot)
-		{
-			bSpawnedFloorLoot = true;
-		}
+		//if (!bSpawnedFloorLoot)
+		//{
+		//	bSpawnedFloorLoot = true;
+		//}
 
 		auto PlayerController = (AFortPlayerControllerAthena*)NetConnection->PlayerController;
 
@@ -252,8 +252,8 @@ static inline void SetClientLoginStateHook(UNetConnection* NetConnection, uint8_
 		PlayerState->CharacterParts.Parts[1] = UObject::FindObject<UCustomCharacterPart>("CustomCharacterPart F_Med_Soldier_01.F_Med_Soldier_01");
 		PlayerState->OnRep_CharacterParts();
 
-		Inventory::Setup(PlayerController);
-		Inventory::Update(PlayerController);
+		//Inventory::Setup(PlayerController);
+		//Inventory::Update(PlayerController);
 
 		PlayerController->bHasServerFinishedLoading = true;
 		PlayerController->OnRep_bHasServerFinishedLoading();
@@ -329,7 +329,7 @@ void Main()
 	MH_CreateHook((void*)GetPlayerViewpointAddress, GetPlayerViewPointDetour, nullptr);
 	MH_EnableHook((void*)GetPlayerViewpointAddress);
 
-	printf("[+] TODO EST¡ ENGANCHADO. HAGA CLIC EN EL REPRODUCTOR NEGRO NI—O.\n");
+	printf("[+] TODO EST√Å ENGANCHADO. HAGA CLIC EN EL REPRODUCTOR NEGRO NI√ëO.\n");
 	//Start();
 }
 
